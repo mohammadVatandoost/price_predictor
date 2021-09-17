@@ -1,4 +1,3 @@
-from .db_handler import *
 # from colorlog import ColoredFormatter
 import colorlog
 import logging

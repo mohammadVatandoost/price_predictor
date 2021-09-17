@@ -33,8 +33,21 @@ def readData(csvfile, logger):
 
     return dataSet
 
-
-
+def preProcessData(rawDataSet):
+    X = []
+    Y = []
+    setSize = 5
+    for i in range(len(rawDataSet)-setSize):
+        temp = []
+        for j in range(setSize-1):
+            temp.append(rawDataSet[i+j].Low)
+            temp.append(rawDataSet[i + j].High)
+            temp.append(rawDataSet[i + j].Open)
+            temp.append(rawDataSet[i + j].Close)
+            temp.append(rawDataSet[i + j].Volume)
+        X.append(temp)
+        Y.append(rawDataSet[i + setSize].Close)
+    return X,Y
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     log_provider = log.init()
@@ -45,6 +58,13 @@ if __name__ == '__main__':
     logger.info("dataSet length = %d", len(rawDataSet))
     logger.info("first data date = %s", rawDataSet[0].Date)
     logger.info("last data date = %s", rawDataSet[len(rawDataSet)-1].Date)
+    X, Y = preProcessData(rawDataSet)
+    print(X)
+    print("\n ================ \n")
+    print(Y)
+    
+
+
     # for i in range(5, len(rawDataSet)):
         # y = fft(x)
 
